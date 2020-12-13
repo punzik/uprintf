@@ -24,7 +24,7 @@ bits) and / or prefix 'u' for an unsigned number.
 
 Type specifiers:
   - d, i Decimal integer.
-  - o Octal whole.
+  - o Octal integer.
   - b Binary integer.
   - x Hexadecimal integer (lowercase).
   - X Hexadecimal integer (uppercase).
