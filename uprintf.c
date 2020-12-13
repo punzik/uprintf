@@ -66,12 +66,12 @@ static int l_strlen(const char *str)
 /* Helper functions for p() */
 static void print_string(put_char_func pc, const char *str, int width, char wchr)
 {
-    int sl;
+    int sl, w;
 
     if (width < 0)
     {
         sl = l_strlen(str);
-        for (int w = -width; w > sl; w --)
+        for (w = -width; w > sl; w --)
             pc(wchr);
     }
 
@@ -80,7 +80,7 @@ static void print_string(put_char_func pc, const char *str, int width, char wchr
 
     if (width > 0)
     {
-        for (int w = width; w > sl; w --)
+        for (w = width; w > sl; w --)
             pc(wchr);
     }
 }

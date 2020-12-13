@@ -12,4 +12,4 @@ void pp(put_char_func pc, const char *fmt, ...);
 void p(const char *fmt, ...);
 int psn(char *str, int size, const char *fmt, ...);
 
-#endif // _UPRINTF
+#endif /* _UPRINTF */
