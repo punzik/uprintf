@@ -2,6 +2,10 @@
 #include <stdarg.h>
 #include "uprintf.h"
 
+#ifdef UPRINTF_CUSTOM_DIV_FUNC
+#include "idiv.h"
+#endif
+
 /*
  * ------------------- Простая замена printf ------------------------
  *
@@ -97,8 +101,15 @@ static void print_decimal(put_char_func pc, uint64_t u, int negative, unsigned i
     s[si--] = 0;
 
     do {
-        int l = (int)(u % base);
+        uint64_t l;
+
+#ifdef UPRINTF_CUSTOM_DIV_FUNC
+        u = idiv64_uu(u, (uint64_t)base, &l);
+#else
+        l = u % base;
         u = u / base;
+#endif
+
         s[si--] = abet[lcase][l];
     } while (u > 0);
 

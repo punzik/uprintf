@@ -20,6 +20,8 @@ int main(void)
     p("7: |%*s|\n", 5, "s");
     p("8: |%'-*s|\n", -5, "s");
 
+    p("9: |%016ulx|\n", 0x55555555AAAAAAAAll);
+
     /* TODO more tests */
 
     return 0;
