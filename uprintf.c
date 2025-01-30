@@ -103,12 +103,36 @@ static void print_decimal(put_char_func pc, uint64_t u, int negative, unsigned i
     do {
         uint64_t l;
 
+        /* Speed up of special cases */
+        switch (base) {
+        case 2:
+            l = u & 1;
+            u >>= 1;
+            break;
+
+        case 4:
+            l = u & 3;
+            u >>= 2;
+            break;
+
+        case 8:
+            l = u & 7;
+            u >>= 3;
+            break;
+
+        case 16:
+            l = u & 15;
+            u >>= 4;
+            break;
+
+        default:
 #ifdef UPRINTF_CUSTOM_DIV_FUNC
-        u = idiv64_uu(u, (uint64_t)base, &l);
+            u = idiv64_uu(u, (uint64_t)base, &l);
 #else
-        l = u % base;
-        u = u / base;
+            l = u % base;
+            u = u / base;
 #endif
+        }
 
         s[si--] = abet[lcase][l];
     } while (u > 0);
